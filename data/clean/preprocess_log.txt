@@ -1,0 +1,16 @@
+[OWID CO2] 원본 50411행 x 79열
+  iso_code 없는 집계 행 제외: 36개 (예: Africa, Africa (GCP), Asia, Asia (GCP), Asia (excl. China and India) ...)
+  OWID_ 코드 행: 0개 []
+  1990-2022, 국가만 남긴 후: 7194행, 218개국
+[OWID Energy] 원본 23377행 x 130열
+  중복 키 체크 [co2]: 0건
+  중복 키 체크 [energy]: 0건
+  중복 키 체크 [gdp]: 0건
+  중복 키 체크 [geo]: 0건
+  OWID와 Gapminder 국가명이 다른 경우: 21개국 (예: Congo / Congo, Rep.; Cook Islands / Cook Is; Czechia / Czech Republic; Democratic Republic of Congo / Congo, Dem. Rep.; East Timor / Timor-Leste; Faroe Islands / Faeroe Islands)
+  Gapminder 지역 정보가 안 붙은 나라: ['Bonaire Sint Eustatius and Saba', 'Curacao', 'Vatican']
+  Gapminder GDP가 전혀 없는 나라: ['Anguilla', 'Antarctica', 'Aruba', 'Bermuda', 'Bonaire Sint Eustatius and Saba', 'British Virgin Islands', 'Christmas Island', 'Cook Islands', 'Curacao', 'Faroe Islands', 'French Polynesia', 'Greenland', 'Liechtenstein', 'Macao', 'Montserrat', 'New Caledonia', 'Niue', 'Saint Helena', 'Saint Pierre and Miquelon', 'Sint Maarten (Dutch part)', 'Turks and Caicos Islands', 'Vatican', 'Wallis and Futuna']
+  결측 비율(%): gdp_pcap 0.0, co2_per_capita 1.2, consumption_co2_per_capita 38.7, fossil_share_elec 24.6
+  소비기준 CO2 있는 나라: 120개 / 전체 195개
+  [교차검증] log(OWID GDP/pop) vs log(Gapminder gdp_pcap) 상관계수 r = 0.979 (n=5410)
+[최종] 6435행 x 16열, 195개국 -> data/clean/panel_1990_2022.csv
