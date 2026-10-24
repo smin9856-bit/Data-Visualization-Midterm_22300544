@@ -1,0 +1,4298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Richer, but less CO₂: most rich countries already decoupled. Korea hasn't.</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #222; background: #fff; margin: 0; line-height: 1.6; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  h1 { font-size: 28px; line-height: 1.3; margin: 0 0 10px; }
+  .lead { font-size: 17px; color: #333; margin: 0 0 8px; }
+  .meta { font-size: 13px; color: #777; margin-bottom: 26px; }
+  .step { margin: 34px 0 10px; }
+  .step p { font-size: 15.5px; margin: 0 0 12px; max-width: 820px; }
+  .chart { overflow-x: auto; margin: 6px 0 4px; }
+  .cap { font-size: 12.5px; color: #666; max-width: 820px; }
+  .limits { background: #f6f6f6; border-radius: 6px; padding: 14px 18px; font-size: 14px; margin-top: 34px; }
+  .limits h3 { margin: 0 0 6px; font-size: 15px; }
+  .limits ul { margin: 0; padding-left: 18px; }
+  .src { font-size: 12.5px; color: #666; border-top: 1px solid #ddd; margin-top: 26px; padding-top: 10px; }
+  .src a { color: #336; }
+  .kr { color: #D62728; }
+  .bl { color: #2B6CB0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Richer, but less CO₂: <span class="bl">27 of 44</span> high-income countries already did it, even counting imports. <span class="kr">South Korea</span> did not.</h1>
+  <p class="lead">A common belief is that a growing economy has to burn more carbon. Data from the mid-2000s to the late 2010s shows that most rich countries have already broken this link, and that it is not just a result of moving factories abroad.</p>
+  <div class="meta">For: Korean university students and general readers who follow climate and economy news · Data: Our World in Data (Global Carbon Budget), Gapminder · All charts use fixed settings, nothing needs to be clicked.</div>
+
+  <div class="step">
+    <p><b>Step 1. Look at the typical rich country.</b> We set each country's 2004–06 average to 100 and took the median across the 44 high-income countries for every year. After the mid-2000s the two lines open up like scissors: GDP per person keeps rising, while CO₂ per person (consumption-based, so goods imported from other countries are counted too) goes down. Korea's lines stay together much longer.</p>
+    <div class="chart" id="c1"></div>
+    <p class="cap">Median of country indices, computed separately for each year. Same y-axis in both panels so the gap can be compared directly.</p>
+  </div>
+
+  <div class="step">
+    <p><b>Step 2. Is that just an average, or do many countries really do this?</b> Each dot is one country. Countries in the shaded lower-right corner grew their GDP per person and cut their CO₂ per person. 27 of the 44 high-income countries are there. Most middle- and low-income countries (grey) are in the upper right, so this is not true for every country yet.</p>
+    <div class="chart" id="c2"></div>
+    <p class="cap">Countries with at least 1 million people and consumption-based data (115). Four rich countries (Greece, Italy, UAE, Kuwait) lowered CO₂ while their GDP per person also fell, so they are not counted as decoupled.</p>
+  </div>
+
+  <div class="step">
+    <p><b>Step 3. Did rich countries just "export" their emissions?</b> If they did, the CO₂ fall would disappear once imports are counted. The hollow dot is CO₂ produced inside the country, the filled dot includes imports. For the decoupled countries the filled dots stay clearly below zero, about as low as the hollow dots. Korea is on the other side of zero in both measures.</p>
+    <div class="chart" id="c3"></div>
+    <p class="cap">High-income countries only, sorted by the consumption-based change. Panama's consumption-based value (+986%) is cut at +60% because its starting level was very small (0.4 t per person).</p>
+  </div>
+
+  <div class="limits">
+    <h3>What this does and doesn't show</h3>
+    <ul>
+      <li>This is about <b>per-person</b> change. Total national emissions can look different when population grows.</li>
+      <li>It shows that growth and CO₂ <i>can</i> move apart. It does not show <i>why</i> (energy mix, industry structure, policy, ...), so no causal claim is made here.</li>
+      <li>Being in the "decoupled" corner does not mean emissions fell fast enough for climate targets.</li>
+      <li>Consumption-based CO₂ is a model estimate (input-output tables) and exists for 120 countries only. The end period stops at 2019 to avoid the COVID dip. Using 2020–22 or single years gives 27–30 countries, and starting from 1999–01 gives 25 of 42.</li>
+      <li>Income groups are the current World Bank groups, not the ones of 2005.</li>
+    </ul>
+  </div>
+
+  <div class="src">
+    Sources: Our World in Data CO₂ dataset (Global Carbon Budget, incl. consumption-based emissions), <a href="https://github.com/owid/co2-data">github.com/owid/co2-data</a> · Gapminder GDP per capita (PPP, constant 2021 int. $, v32) and World Bank income groups, <a href="https://www.gapminder.org/data/">gapminder.org/data</a> · accessed 2026-10-22.
+  </div>
+</div>
+<script>
+const opt = {actions: false};
+vegaEmbed('#c1', {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json",
+  "config": {
+    "axis": {
+      "domainColor": "#888",
+      "gridColor": "#EEEEEE",
+      "labelFontSize": 12,
+      "tickColor": "#888",
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 16,
+      "subtitleColor": "#555",
+      "subtitleFontSize": 12.5
+    },
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 300,
+      "stroke": null
+    }
+  },
+  "datasets": {
+    "data-20484a3372456c919c60fa6b33598338": [
+      {
+        "t": "Grey line = GDP per person  ·  Coloured line = CO₂ per person incl. imports (consumption-based)  ·  shaded = years compared in ②③"
+      }
+    ],
+    "data-2d07188b184043ad400937d41793564f": [
+      {
+        "index": 156.74160841362806,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2022
+      },
+      {
+        "index": 113.214894134826,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2022
+      }
+    ],
+    "data-41500f3d9c0b262fb8c2fb85fb4fa17c": [
+      {
+        "index": 65.85427293910196,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 1995
+      },
+      {
+        "index": 69.99181308646641,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 1996
+      },
+      {
+        "index": 73.23509037093015,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 1997
+      },
+      {
+        "index": 68.62522828893506,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 1998
+      },
+      {
+        "index": 75.61244410857107,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 1999
+      },
+      {
+        "index": 81.43459915611815,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2000
+      },
+      {
+        "index": 84.37559040241828,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2001
+      },
+      {
+        "index": 90.01511430190818,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2002
+      },
+      {
+        "index": 92.03980099502488,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2003
+      },
+      {
+        "index": 96.1175136973361,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2004
+      },
+      {
+        "index": 99.7323509037093,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2005
+      },
+      {
+        "index": 104.15013539895459,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2006
+      },
+      {
+        "index": 109.35512311858429,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2007
+      },
+      {
+        "index": 111.54669689527049,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2008
+      },
+      {
+        "index": 111.63486365640154,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2009
+      },
+      {
+        "index": 118.43000188928774,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2010
+      },
+      {
+        "index": 121.85276150891113,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2011
+      },
+      {
+        "index": 124.12620442093332,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2012
+      },
+      {
+        "index": 127.47339253101582,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2013
+      },
+      {
+        "index": 130.73241387996725,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2014
+      },
+      {
+        "index": 133.6985956294477,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2015
+      },
+      {
+        "index": 137.09301593299327,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2016
+      },
+      {
+        "index": 141.0290320549153,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2017
+      },
+      {
+        "index": 144.49902386800176,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2018
+      },
+      {
+        "index": 147.22904465016688,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2019
+      },
+      {
+        "index": 145.98526355563953,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2020
+      },
+      {
+        "index": 152.46552049877195,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2021
+      },
+      {
+        "index": 156.74160841362806,
+        "panel": "South Korea",
+        "series": "GDP per person",
+        "year": 2022
+      },
+      {
+        "index": 83.38606311349072,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 1995
+      },
+      {
+        "index": 89.43781942078365,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 1996
+      },
+      {
+        "index": 88.2128660663584,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 1997
+      },
+      {
+        "index": 64.48446499553825,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 1998
+      },
+      {
+        "index": 76.06067980855033,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 1999
+      },
+      {
+        "index": 87.11770909385902,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2000
+      },
+      {
+        "index": 86.89867769935913,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2001
+      },
+      {
+        "index": 92.73951488602256,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2002
+      },
+      {
+        "index": 93.77788594142939,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2003
+      },
+      {
+        "index": 95.75728076579865,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2004
+      },
+      {
+        "index": 100.76255374381438,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2005
+      },
+      {
+        "index": 103.48016549038697,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2006
+      },
+      {
+        "index": 108.11227387036585,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2007
+      },
+      {
+        "index": 108.1041615964955,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2008
+      },
+      {
+        "index": 95.89518942159488,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2009
+      },
+      {
+        "index": 108.88293988805063,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2010
+      },
+      {
+        "index": 112.80116816743732,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2011
+      },
+      {
+        "index": 108.7693680538655,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2012
+      },
+      {
+        "index": 108.50977529001378,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2013
+      },
+      {
+        "index": 111.51131662204916,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2014
+      },
+      {
+        "index": 107.60931289040319,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2015
+      },
+      {
+        "index": 105.86517400827454,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2016
+      },
+      {
+        "index": 110.5784051269571,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2017
+      },
+      {
+        "index": 117.69286931126794,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2018
+      },
+      {
+        "index": 115.26729942402855,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2019
+      },
+      {
+        "index": 106.69262594305182,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2020
+      },
+      {
+        "index": 112.27387036586356,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2021
+      },
+      {
+        "index": 113.214894134826,
+        "panel": "South Korea",
+        "series": "CO₂ per person (consumption)",
+        "year": 2022
+      }
+    ],
+    "data-5d9ccf25cdc26d6f4da0ea3fa44236de": [
+      {
+        "lab": "start",
+        "x0": 2004,
+        "x1": 2006,
+        "xm": 2005.0
+      },
+      {
+        "lab": "end",
+        "x0": 2017,
+        "x1": 2019,
+        "xm": 2018.0
+      }
+    ],
+    "data-97aa60a9dd1a45030e61f1cf8f18400b": [
+      {
+        "index": 121.88647731876051,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2022
+      },
+      {
+        "index": 81.21153557492312,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2022
+      }
+    ],
+    "data-9d78020f76d997398dca41cfa4b6d9e0": [
+      {
+        "y": 100
+      }
+    ],
+    "data-c44d0bb648534e783b01e9321e360b79": [
+      {
+        "index": 76.00145443711014,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 1995
+      },
+      {
+        "index": 78.29477111943493,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 1996
+      },
+      {
+        "index": 81.97121200094996,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 1997
+      },
+      {
+        "index": 82.32050514462942,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 1998
+      },
+      {
+        "index": 85.49602146255957,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 1999
+      },
+      {
+        "index": 88.58485584643986,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2000
+      },
+      {
+        "index": 90.37999968868557,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2001
+      },
+      {
+        "index": 91.59905025199427,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2002
+      },
+      {
+        "index": 93.48581908478292,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2003
+      },
+      {
+        "index": 97.14497906244017,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2004
+      },
+      {
+        "index": 99.71396081661109,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2005
+      },
+      {
+        "index": 103.27715162841496,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2006
+      },
+      {
+        "index": 106.37341420273268,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2007
+      },
+      {
+        "index": 107.96879027297717,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2008
+      },
+      {
+        "index": 103.29627816719459,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2009
+      },
+      {
+        "index": 104.07583266429725,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2010
+      },
+      {
+        "index": 106.42070908172644,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2011
+      },
+      {
+        "index": 104.81376929819328,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2012
+      },
+      {
+        "index": 105.30086228259863,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2013
+      },
+      {
+        "index": 107.1420985306045,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2014
+      },
+      {
+        "index": 109.50693740414334,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2015
+      },
+      {
+        "index": 111.4178511109265,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2016
+      },
+      {
+        "index": 112.47109043990064,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2017
+      },
+      {
+        "index": 114.30979169064857,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2018
+      },
+      {
+        "index": 115.68508267140368,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2019
+      },
+      {
+        "index": 111.91228894810573,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2020
+      },
+      {
+        "index": 117.58533389111392,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2021
+      },
+      {
+        "index": 121.88647731876051,
+        "panel": "Median of 44 high-income countries",
+        "series": "GDP per person",
+        "year": 2022
+      },
+      {
+        "index": 89.85325697924122,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 1995
+      },
+      {
+        "index": 89.43781942078365,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 1996
+      },
+      {
+        "index": 89.155329095971,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 1997
+      },
+      {
+        "index": 92.02395362171116,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 1998
+      },
+      {
+        "index": 90.69289600852328,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 1999
+      },
+      {
+        "index": 93.99608510092095,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2000
+      },
+      {
+        "index": 91.65472260246396,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2001
+      },
+      {
+        "index": 93.4781781515163,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2002
+      },
+      {
+        "index": 97.71228819837009,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2003
+      },
+      {
+        "index": 98.9733762599412,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2004
+      },
+      {
+        "index": 99.66152551284065,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2005
+      },
+      {
+        "index": 101.43629074429144,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2006
+      },
+      {
+        "index": 102.16511656068954,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2007
+      },
+      {
+        "index": 100.40841972981465,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2008
+      },
+      {
+        "index": 92.28322933892403,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2009
+      },
+      {
+        "index": 95.95628977253688,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2010
+      },
+      {
+        "index": 98.08394125738977,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2011
+      },
+      {
+        "index": 90.3801270322885,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2012
+      },
+      {
+        "index": 89.79879483963404,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2013
+      },
+      {
+        "index": 89.0882453429493,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2014
+      },
+      {
+        "index": 86.26207949081288,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2015
+      },
+      {
+        "index": 86.38077285579642,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2016
+      },
+      {
+        "index": 85.72285203595263,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2017
+      },
+      {
+        "index": 86.98257834676468,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2018
+      },
+      {
+        "index": 83.60975534295406,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2019
+      },
+      {
+        "index": 77.71560280120748,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2020
+      },
+      {
+        "index": 81.27450285238345,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2021
+      },
+      {
+        "index": 81.21153557492312,
+        "panel": "Median of 44 high-income countries",
+        "series": "CO₂ per person (consumption)",
+        "year": 2022
+      }
+    ]
+  },
+  "title": {
+    "subtitle": [
+      "In the typical high-income country, GDP per person kept rising after the mid-2000s while consumption-based CO₂ per person fell.",
+      "In South Korea, CO₂ per person rose together with GDP until about 2011 and has not gone back below the starting level. (Same y-axis in both panels.)"
+    ],
+    "text": "① The lines split apart: richer, but less CO₂ per person"
+  },
+  "vconcat": [
+    {
+      "data": {
+        "name": "data-20484a3372456c919c60fa6b33598338"
+      },
+      "encoding": {
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        },
+        "x": {
+          "value": 0
+        }
+      },
+      "height": 14,
+      "mark": {
+        "align": "left",
+        "color": "#444",
+        "fontSize": 12,
+        "type": "text"
+      },
+      "width": 700
+    },
+    {
+      "hconcat": [
+        {
+          "data": {
+            "name": "data-5d9ccf25cdc26d6f4da0ea3fa44236de"
+          },
+          "height": 250,
+          "layer": [
+            {
+              "encoding": {
+                "x": {
+                  "field": "x0",
+                  "scale": {
+                    "domain": [
+                      1995,
+                      2022
+                    ],
+                    "nice": false
+                  },
+                  "type": "quantitative"
+                },
+                "x2": {
+                  "field": "x1"
+                }
+              },
+              "mark": {
+                "color": "#EFEFEF",
+                "type": "rect"
+              }
+            },
+            {
+              "encoding": {
+                "text": {
+                  "field": "lab",
+                  "type": "nominal"
+                },
+                "x": {
+                  "field": "xm",
+                  "scale": {
+                    "domain": [
+                      1995,
+                      2022
+                    ],
+                    "nice": false
+                  },
+                  "type": "quantitative"
+                },
+                "y": {
+                  "value": 0
+                }
+              },
+              "mark": {
+                "baseline": "bottom",
+                "color": "#888",
+                "dy": -4,
+                "fontSize": 10,
+                "type": "text"
+              }
+            },
+            {
+              "data": {
+                "name": "data-9d78020f76d997398dca41cfa4b6d9e0"
+              },
+              "encoding": {
+                "y": {
+                  "field": "y",
+                  "scale": {
+                    "domain": [
+                      50,
+                      160
+                    ],
+                    "nice": false
+                  },
+                  "type": "quantitative"
+                }
+              },
+              "mark": {
+                "color": "#888",
+                "strokeDash": [
+                  3,
+                  3
+                ],
+                "type": "rule"
+              }
+            },
+            {
+              "data": {
+                "name": "data-c44d0bb648534e783b01e9321e360b79"
+              },
+              "encoding": {
+                "color": {
+                  "field": "series",
+                  "legend": null,
+                  "scale": {
+                    "domain": [
+                      "GDP per person",
+                      "CO₂ per person (consumption)"
+                    ],
+                    "range": [
+                      "#555555",
+                      "#2B6CB0"
+                    ]
+                  },
+                  "type": "nominal"
+                },
+                "tooltip": [
+                  {
+                    "field": "year",
+                    "type": "quantitative"
+                  },
+                  {
+                    "field": "series",
+                    "type": "nominal"
+                  },
+                  {
+                    "field": "index",
+                    "format": ".0f",
+                    "type": "quantitative"
+                  }
+                ],
+                "x": {
+                  "axis": {
+                    "format": "d",
+                    "values": [
+                      1995,
+                      2000,
+                      2005,
+                      2010,
+                      2015,
+                      2020
+                    ]
+                  },
+                  "field": "year",
+                  "scale": {
+                    "domain": [
+                      1995,
+                      2022
+                    ],
+                    "nice": false
+                  },
+                  "title": null,
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "index",
+                  "scale": {
+                    "domain": [
+                      50,
+                      160
+                    ],
+                    "nice": false
+                  },
+                  "title": "Index (2004–06 average = 100)",
+                  "type": "quantitative"
+                }
+              },
+              "mark": {
+                "strokeWidth": 2.6,
+                "type": "line"
+              }
+            },
+            {
+              "data": {
+                "name": "data-97aa60a9dd1a45030e61f1cf8f18400b"
+              },
+              "encoding": {
+                "color": {
+                  "field": "series",
+                  "legend": null,
+                  "scale": {
+                    "domain": [
+                      "GDP per person",
+                      "CO₂ per person (consumption)"
+                    ],
+                    "range": [
+                      "#555555",
+                      "#2B6CB0"
+                    ]
+                  },
+                  "type": "nominal"
+                },
+                "text": {
+                  "field": "index",
+                  "format": ".0f",
+                  "type": "quantitative"
+                },
+                "x": {
+                  "field": "year",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "index",
+                  "type": "quantitative"
+                }
+              },
+              "mark": {
+                "align": "left",
+                "dx": 6,
+                "fontSize": 12,
+                "fontWeight": "bold",
+                "type": "text"
+              }
+            }
+          ],
+          "title": {
+            "anchor": "start",
+            "fontSize": 13,
+            "text": "Median of 44 high-income countries"
+          },
+          "width": 330
+        },
+        {
+          "data": {
+            "name": "data-5d9ccf25cdc26d6f4da0ea3fa44236de"
+          },
+          "height": 250,
+          "layer": [
+            {
+              "encoding": {
+                "x": {
+                  "field": "x0",
+                  "scale": {
+                    "domain": [
+                      1995,
+                      2022
+                    ],
+                    "nice": false
+                  },
+                  "type": "quantitative"
+                },
+                "x2": {
+                  "field": "x1"
+                }
+              },
+              "mark": {
+                "color": "#EFEFEF",
+                "type": "rect"
+              }
+            },
+            {
+              "encoding": {
+                "text": {
+                  "field": "lab",
+                  "type": "nominal"
+                },
+                "x": {
+                  "field": "xm",
+                  "scale": {
+                    "domain": [
+                      1995,
+                      2022
+                    ],
+                    "nice": false
+                  },
+                  "type": "quantitative"
+                },
+                "y": {
+                  "value": 0
+                }
+              },
+              "mark": {
+                "baseline": "bottom",
+                "color": "#888",
+                "dy": -4,
+                "fontSize": 10,
+                "type": "text"
+              }
+            },
+            {
+              "data": {
+                "name": "data-9d78020f76d997398dca41cfa4b6d9e0"
+              },
+              "encoding": {
+                "y": {
+                  "field": "y",
+                  "scale": {
+                    "domain": [
+                      50,
+                      160
+                    ],
+                    "nice": false
+                  },
+                  "type": "quantitative"
+                }
+              },
+              "mark": {
+                "color": "#888",
+                "strokeDash": [
+                  3,
+                  3
+                ],
+                "type": "rule"
+              }
+            },
+            {
+              "data": {
+                "name": "data-41500f3d9c0b262fb8c2fb85fb4fa17c"
+              },
+              "encoding": {
+                "color": {
+                  "field": "series",
+                  "legend": null,
+                  "scale": {
+                    "domain": [
+                      "GDP per person",
+                      "CO₂ per person (consumption)"
+                    ],
+                    "range": [
+                      "#555555",
+                      "#D62728"
+                    ]
+                  },
+                  "type": "nominal"
+                },
+                "tooltip": [
+                  {
+                    "field": "year",
+                    "type": "quantitative"
+                  },
+                  {
+                    "field": "series",
+                    "type": "nominal"
+                  },
+                  {
+                    "field": "index",
+                    "format": ".0f",
+                    "type": "quantitative"
+                  }
+                ],
+                "x": {
+                  "axis": {
+                    "format": "d",
+                    "values": [
+                      1995,
+                      2000,
+                      2005,
+                      2010,
+                      2015,
+                      2020
+                    ]
+                  },
+                  "field": "year",
+                  "scale": {
+                    "domain": [
+                      1995,
+                      2022
+                    ],
+                    "nice": false
+                  },
+                  "title": null,
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "index",
+                  "scale": {
+                    "domain": [
+                      50,
+                      160
+                    ],
+                    "nice": false
+                  },
+                  "title": "Index (2004–06 average = 100)",
+                  "type": "quantitative"
+                }
+              },
+              "mark": {
+                "strokeWidth": 2.6,
+                "type": "line"
+              }
+            },
+            {
+              "data": {
+                "name": "data-2d07188b184043ad400937d41793564f"
+              },
+              "encoding": {
+                "color": {
+                  "field": "series",
+                  "legend": null,
+                  "scale": {
+                    "domain": [
+                      "GDP per person",
+                      "CO₂ per person (consumption)"
+                    ],
+                    "range": [
+                      "#555555",
+                      "#D62728"
+                    ]
+                  },
+                  "type": "nominal"
+                },
+                "text": {
+                  "field": "index",
+                  "format": ".0f",
+                  "type": "quantitative"
+                },
+                "x": {
+                  "field": "year",
+                  "type": "quantitative"
+                },
+                "y": {
+                  "field": "index",
+                  "type": "quantitative"
+                }
+              },
+              "mark": {
+                "align": "left",
+                "dx": 6,
+                "fontSize": 12,
+                "fontWeight": "bold",
+                "type": "text"
+              }
+            }
+          ],
+          "title": {
+            "anchor": "start",
+            "fontSize": 13,
+            "text": "South Korea"
+          },
+          "width": 330
+        }
+      ],
+      "resolve": {
+        "scale": {
+          "color": "independent"
+        }
+      },
+      "spacing": 40
+    }
+  ]
+}, opt);
+vegaEmbed('#c2', {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json",
+  "config": {
+    "axis": {
+      "domainColor": "#888",
+      "gridColor": "#EEEEEE",
+      "labelFontSize": 12,
+      "tickColor": "#888",
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 16,
+      "subtitleColor": "#555",
+      "subtitleFontSize": 12.5
+    },
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 300,
+      "stroke": null
+    }
+  },
+  "datasets": {
+    "data-2a567963f4a4e0fb2a7a71ef6dab4cbc": [
+      {
+        "t": "▲ = above +150%, drawn at the top edge",
+        "x": 178,
+        "y": 144
+      }
+    ],
+    "data-38e8c34d83e61d3b6ac8b65ff5cd3c7a": [
+      {
+        "t": "Decoupled zone: GDP ↑, CO₂ ↓  —  27 of 44 high-income countries",
+        "x": 178,
+        "y": -52
+      }
+    ],
+    "data-4fddb8db3c82714301c67d9edab9a42f": [
+      {
+        "clipped": false,
+        "country": "South Korea",
+        "d_cons": 14.512857954084524,
+        "d_gdp": 44.252366857694646,
+        "d_pop": 7.899235165501439,
+        "d_prod": 22.295911828783808,
+        "group": "South Korea",
+        "income_group": "High income",
+        "lab": "South Korea",
+        "order": 2,
+        "pop_base": 47851746.666666664,
+        "region": "Asia",
+        "y_plot": 14.512857954084524
+      }
+    ],
+    "data-7009d50f3e28879cedfd006e3343d767": [
+      {
+        "clipped": false,
+        "country": "China",
+        "d_cons": 86.33761846673549,
+        "d_gdp": 173.77435897435896,
+        "d_pop": 8.261770138853276,
+        "d_prod": 63.25952434205622,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "lab": "China",
+        "order": 0,
+        "pop_base": 1310060493.6666667,
+        "region": "Asia",
+        "y_plot": 86.33761846673549
+      },
+      {
+        "clipped": false,
+        "country": "Germany",
+        "d_cons": -17.056759870143456,
+        "d_gdp": 21.124421700136974,
+        "d_pop": 1.7044691535083478,
+        "d_prod": -15.8319317261571,
+        "group": "High income",
+        "income_group": "High income",
+        "lab": "Germany",
+        "order": 1,
+        "pop_base": 81947136.66666667,
+        "region": "Europe",
+        "y_plot": -17.056759870143456
+      },
+      {
+        "clipped": false,
+        "country": "Ireland",
+        "d_cons": -42.16781506095323,
+        "d_gdp": 45.29852777952294,
+        "d_pop": 17.02293748244612,
+        "d_prod": -30.646485979115333,
+        "group": "High income",
+        "income_group": "High income",
+        "lab": "Ireland",
+        "order": 1,
+        "pop_base": 4163374.6666666665,
+        "region": "Europe",
+        "y_plot": -42.16781506095323
+      },
+      {
+        "clipped": true,
+        "country": "Panama",
+        "d_cons": 985.7929948839038,
+        "d_gdp": 93.47916378236188,
+        "d_pop": 25.777270337288517,
+        "d_prod": 26.775399252463483,
+        "group": "High income",
+        "income_group": "High income",
+        "lab": "Panama (+986%, off scale)",
+        "order": 1,
+        "pop_base": 3313068.6666666665,
+        "region": "Americas",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "United Kingdom",
+        "d_cons": -35.91164574250144,
+        "d_gdp": 9.169000412042827,
+        "d_pop": 10.120463654355527,
+        "d_prod": -39.94264065432142,
+        "group": "High income",
+        "income_group": "High income",
+        "lab": "United Kingdom",
+        "order": 1,
+        "pop_base": 60605721.333333336,
+        "region": "Europe",
+        "y_plot": -35.91164574250144
+      },
+      {
+        "clipped": false,
+        "country": "United States",
+        "d_cons": -25.25650202815557,
+        "d_gdp": 12.912807676261995,
+        "d_pop": 13.279271600502774,
+        "d_prod": -23.758693191007595,
+        "group": "High income",
+        "income_group": "High income",
+        "lab": "United States",
+        "order": 1,
+        "pop_base": 295744374.0,
+        "region": "Americas",
+        "y_plot": -25.25650202815557
+      }
+    ],
+    "data-813453d9f29fedcd53e7aedd3fac0204": [
+      {
+        "x0": 0,
+        "x1": 180,
+        "y0": -60,
+        "y1": 0
+      }
+    ],
+    "data-d2c1a376110f55439b51d979c4c4c27a": [
+      {
+        "v": 0
+      }
+    ],
+    "data-f8d3447ac0a710e60d645b50a3c3d3ae": [
+      {
+        "clipped": false,
+        "country": "Albania",
+        "d_cons": 13.538131809251652,
+        "d_gdp": 62.48243732899503,
+        "d_pop": -5.941474087983001,
+        "d_prod": 33.27521793275216,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 3075207.6666666665,
+        "region": "Europe",
+        "y_plot": 13.538131809251652
+      },
+      {
+        "clipped": false,
+        "country": "Argentina",
+        "d_cons": 9.04825143868968,
+        "d_gdp": 19.135266539329756,
+        "d_pop": 13.822153507462943,
+        "d_prod": -2.0039761431411396,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 39218271.333333336,
+        "region": "Americas",
+        "y_plot": 9.04825143868968
+      },
+      {
+        "clipped": false,
+        "country": "Armenia",
+        "d_cons": 56.144864436968156,
+        "d_gdp": 77.52458248790388,
+        "d_pop": -3.2193607579323102,
+        "d_prod": 46.155700168715356,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 3006425.0,
+        "region": "Europe",
+        "y_plot": 56.144864436968156
+      },
+      {
+        "clipped": false,
+        "country": "Australia",
+        "d_cons": -11.62817244397093,
+        "d_gdp": 14.10864646437837,
+        "d_pop": 23.63583278893997,
+        "d_prod": -13.196465514218591,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 20310578.333333332,
+        "region": "Asia",
+        "y_plot": -11.62817244397093
+      },
+      {
+        "clipped": false,
+        "country": "Austria",
+        "d_cons": -21.617005622996476,
+        "d_gdp": 12.427511086539699,
+        "d_pop": 7.49295544478672,
+        "d_prod": -18.714356121946064,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 8224200.333333333,
+        "region": "Europe",
+        "y_plot": -21.617005622996476
+      },
+      {
+        "clipped": false,
+        "country": "Azerbaijan",
+        "d_cons": -18.343653250773983,
+        "d_gdp": 89.73901405308942,
+        "d_pop": 16.746216505128864,
+        "d_prod": -9.200102223358053,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 8599500.666666666,
+        "region": "Europe",
+        "y_plot": -18.343653250773983
+      },
+      {
+        "clipped": true,
+        "country": "Bangladesh",
+        "d_cons": 212.98543689320385,
+        "d_gdp": 101.32914704343277,
+        "d_pop": 13.040201458244871,
+        "d_prod": 105.38847117794484,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 144674876.33333334,
+        "region": "Asia",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Belarus",
+        "d_cons": 60.727221078048466,
+        "d_gdp": 57.19052852432809,
+        "d_pop": -2.0672323080071497,
+        "d_prod": 4.490389274753692,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 9670321.0,
+        "region": "Europe",
+        "y_plot": 60.727221078048466
+      },
+      {
+        "clipped": false,
+        "country": "Belgium",
+        "d_cons": -12.741766647878238,
+        "d_gdp": 10.231463464353885,
+        "d_pop": 9.05345753420197,
+        "d_prod": -27.46412543631226,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 10482875.333333334,
+        "region": "Europe",
+        "y_plot": -12.741766647878238
+      },
+      {
+        "clipped": false,
+        "country": "Benin",
+        "d_cons": 2.893518518518534,
+        "d_gdp": 19.52080706179067,
+        "d_pop": 46.96246444506211,
+        "d_prod": 33.56713426853706,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 8426162.0,
+        "region": "Africa",
+        "y_plot": 2.893518518518534
+      },
+      {
+        "clipped": false,
+        "country": "Bolivia",
+        "d_cons": 83.87779794313366,
+        "d_gdp": 50.51982468657628,
+        "d_pop": 22.920449293866074,
+        "d_prod": 53.1691985332635,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 9362246.666666666,
+        "region": "Americas",
+        "y_plot": 83.87779794313366
+      },
+      {
+        "clipped": true,
+        "country": "Botswana",
+        "d_cons": 249.29149797570855,
+        "d_gdp": 22.975374460522957,
+        "d_pop": 24.92810002970174,
+        "d_prod": 46.538111144852714,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 1840520.0,
+        "region": "Africa",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Brazil",
+        "d_cons": 26.77750265298904,
+        "d_gdp": 17.268734019537145,
+        "d_pop": 11.597098297879826,
+        "d_prod": 18.74156545209178,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 184672114.66666666,
+        "region": "Americas",
+        "y_plot": 26.77750265298904
+      },
+      {
+        "clipped": false,
+        "country": "Bulgaria",
+        "d_cons": -7.831674303470793,
+        "d_gdp": 58.887685496589334,
+        "d_pop": -8.702343956744818,
+        "d_prod": -4.075330329570193,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 7694923.0,
+        "region": "Europe",
+        "y_plot": -7.831674303470793
+      },
+      {
+        "clipped": false,
+        "country": "Burkina Faso",
+        "d_cons": 127.56410256410255,
+        "d_gdp": 39.3574297188755,
+        "d_pop": 46.6155736627351,
+        "d_prod": 207.3170731707317,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 13935458.666666666,
+        "region": "Africa",
+        "y_plot": 127.56410256410255
+      },
+      {
+        "clipped": false,
+        "country": "Cambodia",
+        "d_cons": 114.02836335760828,
+        "d_gdp": 117.59270370814833,
+        "d_pop": 21.095243178007816,
+        "d_prod": 405.1660516605166,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 13440990.666666666,
+        "region": "Asia",
+        "y_plot": 114.02836335760828
+      },
+      {
+        "clipped": false,
+        "country": "Cameroon",
+        "d_cons": 6.558849955076362,
+        "d_gdp": 17.650392680754614,
+        "d_pop": 45.292033625053676,
+        "d_prod": 20.225872689938406,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 17078495.666666668,
+        "region": "Africa",
+        "y_plot": 6.558849955076362
+      },
+      {
+        "clipped": false,
+        "country": "Canada",
+        "d_cons": -19.80620643697206,
+        "d_gdp": 9.1739382251669,
+        "d_pop": 14.953353585797124,
+        "d_prod": -12.621910803901127,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 32444008.666666668,
+        "region": "Americas",
+        "y_plot": -19.80620643697206
+      },
+      {
+        "clipped": false,
+        "country": "Chile",
+        "d_cons": 28.555294935279306,
+        "d_gdp": 33.74381510931252,
+        "d_pop": 15.505057885364293,
+        "d_prod": 22.321745299751704,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 16348433.0,
+        "region": "Americas",
+        "y_plot": 28.555294935279306
+      },
+      {
+        "clipped": false,
+        "country": "China",
+        "d_cons": 86.33761846673549,
+        "d_gdp": 173.77435897435896,
+        "d_pop": 8.261770138853276,
+        "d_prod": 63.25952434205622,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 1310060493.6666667,
+        "region": "Asia",
+        "y_plot": 86.33761846673549
+      },
+      {
+        "clipped": false,
+        "country": "Colombia",
+        "d_cons": 37.44698897370653,
+        "d_gdp": 41.3062592735066,
+        "d_pop": 16.381576362922523,
+        "d_prod": 32.5636753154011,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 42121078.666666664,
+        "region": "Americas",
+        "y_plot": 37.44698897370653
+      },
+      {
+        "clipped": false,
+        "country": "Costa Rica",
+        "d_cons": 13.403263403263388,
+        "d_gdp": 46.156127528863465,
+        "d_pop": 16.333718125560125,
+        "d_prod": -0.6256517205422418,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 4260885.333333333,
+        "region": "Americas",
+        "y_plot": 13.403263403263388
+      },
+      {
+        "clipped": false,
+        "country": "Cote d'Ivoire",
+        "d_cons": 57.85288270377733,
+        "d_gdp": 43.476074750691375,
+        "d_pop": 36.83805253631718,
+        "d_prod": 10.376492194674025,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 20070091.0,
+        "region": "Africa",
+        "y_plot": 57.85288270377733
+      },
+      {
+        "clipped": false,
+        "country": "Croatia",
+        "d_cons": -13.497703649987924,
+        "d_gdp": 23.06177042801558,
+        "d_pop": -6.564198297376822,
+        "d_prod": -16.679053635575393,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 4313266.0,
+        "region": "Europe",
+        "y_plot": -13.497703649987924
+      },
+      {
+        "clipped": false,
+        "country": "Cyprus",
+        "d_cons": -13.812838360402157,
+        "d_gdp": 8.184452152621935,
+        "d_pop": 22.623168101194977,
+        "d_prod": -24.574398960363887,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 1036151.6666666666,
+        "region": "Europe",
+        "y_plot": -13.812838360402157
+      },
+      {
+        "clipped": false,
+        "country": "Czechia",
+        "d_cons": -4.273325358851688,
+        "d_gdp": 32.12916571775602,
+        "d_pop": 2.5901051020871257,
+        "d_prod": -19.3018480492813,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 10282066.666666666,
+        "region": "Europe",
+        "y_plot": -4.273325358851688
+      },
+      {
+        "clipped": false,
+        "country": "Denmark",
+        "d_cons": -26.41153518178765,
+        "d_gdp": 8.38287131489659,
+        "d_pop": 6.838436069729803,
+        "d_prod": -43.52138871667699,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 5420523.0,
+        "region": "Europe",
+        "y_plot": -26.41153518178765
+      },
+      {
+        "clipped": false,
+        "country": "Dominican Republic",
+        "d_cons": -12.946902654867266,
+        "d_gdp": 71.7614919298637,
+        "d_pop": 16.88340594636768,
+        "d_prod": 21.868075677518316,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 9223703.666666666,
+        "region": "Americas",
+        "y_plot": -12.946902654867266
+      },
+      {
+        "clipped": false,
+        "country": "Ecuador",
+        "d_cons": 12.53196930946292,
+        "d_gdp": 31.813915655112023,
+        "d_pop": 23.129135071375263,
+        "d_prod": 6.541190990435064,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 13847000.0,
+        "region": "Americas",
+        "y_plot": 12.53196930946292
+      },
+      {
+        "clipped": false,
+        "country": "Egypt",
+        "d_cons": 32.73633677991137,
+        "d_gdp": 34.547983310152986,
+        "d_pop": 30.274907531319094,
+        "d_prod": 12.765262814234424,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 81092952.33333333,
+        "region": "Africa",
+        "y_plot": 32.73633677991137
+      },
+      {
+        "clipped": false,
+        "country": "El Salvador",
+        "d_cons": 4.653751948341123,
+        "d_gdp": 26.658743494119097,
+        "d_pop": 3.570172108077596,
+        "d_prod": 0.8771929824561209,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 6004192.333333333,
+        "region": "Americas",
+        "y_plot": 4.653751948341123
+      },
+      {
+        "clipped": false,
+        "country": "Estonia",
+        "d_cons": -19.04561786892479,
+        "d_gdp": 35.04835421232242,
+        "d_pop": -2.415846417220291,
+        "d_prod": -1.7958487650209243,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 1354804.6666666667,
+        "region": "Europe",
+        "y_plot": -19.04561786892479
+      },
+      {
+        "clipped": true,
+        "country": "Ethiopia",
+        "d_cons": 262.74509803921563,
+        "d_gdp": 141.74757281553397,
+        "d_pop": 43.76807854716904,
+        "d_prod": 115.22842639593911,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 78382727.33333333,
+        "region": "Africa",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Finland",
+        "d_cons": -35.41319409579275,
+        "d_gdp": 6.76378311363004,
+        "d_pop": 5.116803033809725,
+        "d_prod": -34.98528895727049,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 5246824.333333333,
+        "region": "Europe",
+        "y_plot": -35.41319409579275
+      },
+      {
+        "clipped": false,
+        "country": "France",
+        "d_cons": -21.73418297678653,
+        "d_gdp": 8.890927020336115,
+        "d_pop": 6.320616337650353,
+        "d_prod": -25.66362866676628,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 61616702.0,
+        "region": "Europe",
+        "y_plot": -21.73418297678653
+      },
+      {
+        "clipped": false,
+        "country": "Georgia",
+        "d_cons": 80.86028676225408,
+        "d_gdp": 101.3251744163386,
+        "d_pop": -5.7483548648685545,
+        "d_prod": 107.01392470345539,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 4026265.0,
+        "region": "Europe",
+        "y_plot": 80.86028676225408
+      },
+      {
+        "clipped": false,
+        "country": "Germany",
+        "d_cons": -17.056759870143456,
+        "d_gdp": 21.124421700136974,
+        "d_pop": 1.7044691535083478,
+        "d_prod": -15.8319317261571,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 81947136.66666667,
+        "region": "Europe",
+        "y_plot": -17.056759870143456
+      },
+      {
+        "clipped": false,
+        "country": "Ghana",
+        "d_cons": 39.1828533154722,
+        "d_gdp": 69.243970734351,
+        "d_pop": 36.441532916554124,
+        "d_prod": 53.14834578441834,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 22452816.0,
+        "region": "Africa",
+        "y_plot": 39.1828533154722
+      },
+      {
+        "clipped": false,
+        "country": "Greece",
+        "d_cons": -36.246876271284954,
+        "d_gdp": -15.099232418228336,
+        "d_pop": -2.2518170992365083,
+        "d_prod": -35.30431369983974,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 10981605.333333334,
+        "region": "Europe",
+        "y_plot": -36.246876271284954
+      },
+      {
+        "clipped": false,
+        "country": "Guatemala",
+        "d_cons": 58.630827383452335,
+        "d_gdp": 23.389047723773928,
+        "d_pop": 28.66438131386484,
+        "d_prod": 20.304380103934648,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 13087500.333333334,
+        "region": "Americas",
+        "y_plot": 58.630827383452335
+      },
+      {
+        "clipped": true,
+        "country": "Guinea",
+        "d_cons": 189.11290322580646,
+        "d_gdp": 43.355965082444236,
+        "d_pop": 37.387918777767396,
+        "d_prod": 73.2297063903282,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 9249914.0,
+        "region": "Africa",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Honduras",
+        "d_cons": 11.272416737830904,
+        "d_gdp": 22.071864941207387,
+        "d_pop": 30.590767300474365,
+        "d_prod": 9.36316695352839,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 7478065.666666667,
+        "region": "Americas",
+        "y_plot": 11.272416737830904
+      },
+      {
+        "clipped": false,
+        "country": "Hong Kong",
+        "d_cons": 16.0734574628423,
+        "d_gdp": 37.15597601008351,
+        "d_pop": 8.076907193337469,
+        "d_prod": -7.08936867996719,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 6909245.333333333,
+        "region": "Asia",
+        "y_plot": 16.0734574628423
+      },
+      {
+        "clipped": false,
+        "country": "Hungary",
+        "d_cons": -22.694601621042978,
+        "d_gdp": 30.17629430107136,
+        "d_pop": -2.884260109874903,
+        "d_prod": -15.197534323339868,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 10067145.666666666,
+        "region": "Europe",
+        "y_plot": -22.694601621042978
+      },
+      {
+        "clipped": false,
+        "country": "India",
+        "d_cons": 67.44347826086955,
+        "d_gdp": 94.66949152542372,
+        "d_pop": 19.04983843789456,
+        "d_prod": 76.98437998087341,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 1154515572.6666667,
+        "region": "Asia",
+        "y_plot": 67.44347826086955
+      },
+      {
+        "clipped": false,
+        "country": "Indonesia",
+        "d_cons": 61.42721669037463,
+        "d_gdp": 69.45148067977709,
+        "d_pop": 16.89468696559857,
+        "d_prod": 52.04899777282848,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 230916649.0,
+        "region": "Asia",
+        "y_plot": 61.42721669037463
+      },
+      {
+        "clipped": false,
+        "country": "Iran",
+        "d_cons": 18.296680374277365,
+        "d_gdp": 8.85160328113348,
+        "d_pop": 19.825219538680617,
+        "d_prod": 23.66194311346723,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 71825839.33333333,
+        "region": "Asia",
+        "y_plot": 18.296680374277365
+      },
+      {
+        "clipped": false,
+        "country": "Ireland",
+        "d_cons": -42.16781506095323,
+        "d_gdp": 45.29852777952294,
+        "d_pop": 17.02293748244612,
+        "d_prod": -30.646485979115333,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 4163374.6666666665,
+        "region": "Europe",
+        "y_plot": -42.16781506095323
+      },
+      {
+        "clipped": false,
+        "country": "Israel",
+        "d_cons": -8.699242133820896,
+        "d_gdp": 29.864146018311622,
+        "d_pop": 26.46216871229845,
+        "d_prod": -20.710328602868632,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 6729108.333333333,
+        "region": "Asia",
+        "y_plot": -8.699242133820896
+      },
+      {
+        "clipped": false,
+        "country": "Italy",
+        "d_cons": -27.218576798114302,
+        "d_gdp": -4.258891871215353,
+        "d_pop": 3.0476241707464657,
+        "d_prod": -32.54606495940037,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 58483622.0,
+        "region": "Europe",
+        "y_plot": -27.218576798114302
+      },
+      {
+        "clipped": false,
+        "country": "Jamaica",
+        "d_cons": 3.052695336159883,
+        "d_gdp": -0.3156544898563096,
+        "d_pop": 4.948630753064109,
+        "d_prod": -26.054303870595042,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 2686756.6666666665,
+        "region": "Americas",
+        "y_plot": 3.052695336159883
+      },
+      {
+        "clipped": false,
+        "country": "Japan",
+        "d_cons": -14.743389474282154,
+        "d_gdp": 7.999871125716851,
+        "d_pop": -0.7945266265493078,
+        "d_prod": -9.840994120791013,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 127908782.33333333,
+        "region": "Asia",
+        "y_plot": -14.743389474282154
+      },
+      {
+        "clipped": false,
+        "country": "Jordan",
+        "d_cons": -20.747740345110934,
+        "d_gdp": -6.150073894934849,
+        "d_pop": 71.04728491785832,
+        "d_prod": -26.61290322580645,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 6113013.333333333,
+        "region": "Asia",
+        "y_plot": -20.747740345110934
+      },
+      {
+        "clipped": false,
+        "country": "Kazakhstan",
+        "d_cons": 22.799808232312845,
+        "d_gdp": 56.75492521419236,
+        "d_pop": 18.513860022536633,
+        "d_prod": 31.99449283804181,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 15974000.0,
+        "region": "Asia",
+        "y_plot": 22.799808232312845
+      },
+      {
+        "clipped": false,
+        "country": "Kenya",
+        "d_cons": 69.37377690802347,
+        "d_gdp": 32.82395548096457,
+        "d_pop": 40.21241915435414,
+        "d_prod": 43.0769230769231,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 35804649.333333336,
+        "region": "Africa",
+        "y_plot": 69.37377690802347
+      },
+      {
+        "clipped": false,
+        "country": "Kuwait",
+        "d_cons": -19.151722301136363,
+        "d_gdp": -33.11525258746559,
+        "d_pop": 91.16038235402475,
+        "d_prod": -25.790442897718393,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 2252955.6666666665,
+        "region": "Asia",
+        "y_plot": -19.151722301136363
+      },
+      {
+        "clipped": false,
+        "country": "Kyrgyzstan",
+        "d_cons": 80.64853556485355,
+        "d_gdp": 40.6205813040063,
+        "d_pop": 21.129644372087284,
+        "d_prod": 45.57950640424868,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 5243945.333333333,
+        "region": "Asia",
+        "y_plot": 80.64853556485355
+      },
+      {
+        "clipped": true,
+        "country": "Laos",
+        "d_cons": 294.8264125255276,
+        "d_gdp": 111.71228516868239,
+        "d_pop": 21.399992063292483,
+        "d_prod": 1001.0738255033557,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 5871452.333333333,
+        "region": "Asia",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Latvia",
+        "d_cons": 20.04640371229698,
+        "d_gdp": 46.82674347311535,
+        "d_pop": -13.960319827220113,
+        "d_prod": 10.556964403118263,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 2241001.6666666665,
+        "region": "Europe",
+        "y_plot": 20.04640371229698
+      },
+      {
+        "clipped": false,
+        "country": "Lithuania",
+        "d_cons": 26.425835834799717,
+        "d_gdp": 71.83859011119658,
+        "d_pop": -15.467465614635145,
+        "d_prod": 15.467481308786857,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 3322925.3333333335,
+        "region": "Europe",
+        "y_plot": 26.425835834799717
+      },
+      {
+        "clipped": false,
+        "country": "Madagascar",
+        "d_cons": 35.555555555555564,
+        "d_gdp": 1.832460732984309,
+        "d_pop": 43.4901536913959,
+        "d_prod": 53.84615384615381,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 19165744.333333332,
+        "region": "Africa",
+        "y_plot": 35.555555555555564
+      },
+      {
+        "clipped": false,
+        "country": "Malawi",
+        "d_cons": 79.67914438502672,
+        "d_gdp": 34.83483483483483,
+        "d_pop": 44.25094440195843,
+        "d_prod": 21.182266009852224,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 12846489.666666666,
+        "region": "Africa",
+        "y_plot": 79.67914438502672
+      },
+      {
+        "clipped": false,
+        "country": "Malaysia",
+        "d_cons": 44.37002172338887,
+        "d_gdp": 46.30914422137123,
+        "d_pop": 27.34644689381629,
+        "d_prod": 20.77718107204376,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 25836919.0,
+        "region": "Asia",
+        "y_plot": 44.37002172338887
+      },
+      {
+        "clipped": false,
+        "country": "Mauritius",
+        "d_cons": 29.393143915997545,
+        "d_gdp": 59.3441924837645,
+        "d_pop": 2.5182991721383052,
+        "d_prod": 31.792488380856664,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 1256933.0,
+        "region": "Africa",
+        "y_plot": 29.393143915997545
+      },
+      {
+        "clipped": false,
+        "country": "Mexico",
+        "d_cons": -6.101180205673273,
+        "d_gdp": 7.541715937458937,
+        "d_pop": 17.72745099063895,
+        "d_prod": -13.525567089580937,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 105819767.0,
+        "region": "Americas",
+        "y_plot": -6.101180205673273
+      },
+      {
+        "clipped": true,
+        "country": "Mongolia",
+        "d_cons": 233.14854834163305,
+        "d_gdp": 103.09859154929578,
+        "d_pop": 23.575196969767887,
+        "d_prod": 288.86505460218405,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 2563676.0,
+        "region": "Asia",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Morocco",
+        "d_cons": 20.173985086992552,
+        "d_gdp": 36.79694947569114,
+        "d_pop": 18.02184276217307,
+        "d_prod": 22.285583941605825,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 30360781.666666668,
+        "region": "Africa",
+        "y_plot": 20.173985086992552
+      },
+      {
+        "clipped": false,
+        "country": "Mozambique",
+        "d_cons": 51.50115473441108,
+        "d_gdp": 55.77378936674566,
+        "d_pop": 42.896105274903526,
+        "d_prod": 165.20146520146514,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 20310659.0,
+        "region": "Africa",
+        "y_plot": 51.50115473441108
+      },
+      {
+        "clipped": true,
+        "country": "Namibia",
+        "d_cons": 203.7725225225225,
+        "d_gdp": 18.92584029877291,
+        "d_pop": 31.083873762447546,
+        "d_prod": 14.620987321284051,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 1966852.6666666667,
+        "region": "Africa",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": true,
+        "country": "Nepal",
+        "d_cons": 477.0750988142292,
+        "d_gdp": 69.14204250907206,
+        "d_pop": 7.115424182850316,
+        "d_prod": 356.39344262295083,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 26297181.333333332,
+        "region": "Asia",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Netherlands",
+        "d_cons": -22.364348516804068,
+        "d_gdp": 14.258981395375358,
+        "d_pop": 5.850033370375529,
+        "d_prod": -16.177105831533467,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 16461706.666666666,
+        "region": "Europe",
+        "y_plot": -22.364348516804068
+      },
+      {
+        "clipped": false,
+        "country": "New Zealand",
+        "d_cons": -17.92971783587887,
+        "d_gdp": 14.880022252947311,
+        "d_pop": 18.564378252244996,
+        "d_prod": -17.517674783974858,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 4133619.0,
+        "region": "Asia",
+        "y_plot": -17.92971783587887
+      },
+      {
+        "clipped": false,
+        "country": "Nicaragua",
+        "d_cons": 12.28995057660629,
+        "d_gdp": 33.62541763852991,
+        "d_pop": 19.746288389194035,
+        "d_prod": 1.518883415435135,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 5344624.666666667,
+        "region": "Americas",
+        "y_plot": 12.28995057660629
+      },
+      {
+        "clipped": false,
+        "country": "Nigeria",
+        "d_cons": 9.001837109614218,
+        "d_gdp": 28.810847870800615,
+        "d_pop": 41.25626980292449,
+        "d_prod": -14.40849342770475,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 145050545.33333334,
+        "region": "Africa",
+        "y_plot": 9.001837109614218
+      },
+      {
+        "clipped": false,
+        "country": "Norway",
+        "d_cons": -20.305436420540158,
+        "d_gdp": 3.524665553489714,
+        "d_pop": 14.8532872621699,
+        "d_prod": -12.83350932770152,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 4625115.333333333,
+        "region": "Europe",
+        "y_plot": -20.305436420540158
+      },
+      {
+        "clipped": false,
+        "country": "Oman",
+        "d_cons": 27.653891702572643,
+        "d_gdp": -7.628106830234483,
+        "d_pop": 86.01076452579497,
+        "d_prod": 10.913107868605687,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 2459808.0,
+        "region": "Asia",
+        "y_plot": 27.653891702572643
+      },
+      {
+        "clipped": false,
+        "country": "Pakistan",
+        "d_cons": 21.939586645469,
+        "d_gdp": 26.670460087790595,
+        "d_pop": 29.364635799983564,
+        "d_prod": 19.490388913723745,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 175473967.0,
+        "region": "Asia",
+        "y_plot": 21.939586645469
+      },
+      {
+        "clipped": true,
+        "country": "Panama",
+        "d_cons": 985.7929948839038,
+        "d_gdp": 93.47916378236188,
+        "d_pop": 25.777270337288517,
+        "d_prod": 26.775399252463483,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 3313068.6666666665,
+        "region": "Americas",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Paraguay",
+        "d_cons": 94.39432989690724,
+        "d_gdp": 51.22493703594675,
+        "d_pop": 17.989084918292942,
+        "d_prod": 78.50510677808727,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 5447142.0,
+        "region": "Americas",
+        "y_plot": 94.39432989690724
+      },
+      {
+        "clipped": false,
+        "country": "Peru",
+        "d_cons": 91.84735472679971,
+        "d_gdp": 69.44024205748866,
+        "d_pop": 13.51918397826295,
+        "d_prod": 71.2673331183489,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 28092617.666666668,
+        "region": "Americas",
+        "y_plot": 91.84735472679971
+      },
+      {
+        "clipped": false,
+        "country": "Philippines",
+        "d_cons": 61.50371087447564,
+        "d_gdp": 65.19296531509526,
+        "d_pop": 24.427982216893042,
+        "d_prod": 59.12897822445562,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 87973153.66666667,
+        "region": "Asia",
+        "y_plot": 61.50371087447564
+      },
+      {
+        "clipped": false,
+        "country": "Poland",
+        "d_cons": 5.638446257238283,
+        "d_gdp": 67.25261914622736,
+        "d_pop": 0.31374101967878154,
+        "d_prod": 0.39959652389818245,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 38121038.0,
+        "region": "Europe",
+        "y_plot": 5.638446257238283
+      },
+      {
+        "clipped": false,
+        "country": "Portugal",
+        "d_cons": -51.49542575650949,
+        "d_gdp": 9.412324574499852,
+        "d_pop": -1.6157258126711316,
+        "d_prod": -22.389924013739982,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 10502834.0,
+        "region": "Europe",
+        "y_plot": -51.49542575650949
+      },
+      {
+        "clipped": false,
+        "country": "Romania",
+        "d_cons": -9.965635738831635,
+        "d_gdp": 71.04643172671052,
+        "d_pop": -7.640757350295124,
+        "d_prod": -17.27572468745707,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 21217447.333333332,
+        "region": "Europe",
+        "y_plot": -9.965635738831635
+      },
+      {
+        "clipped": false,
+        "country": "Russia",
+        "d_cons": 4.338662212677957,
+        "d_gdp": 33.222138352528695,
+        "d_pop": 1.214407386081784,
+        "d_prod": 5.94328668337103,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 144626975.0,
+        "region": "Europe",
+        "y_plot": 4.338662212677957
+      },
+      {
+        "clipped": true,
+        "country": "Rwanda",
+        "d_cons": 222.72727272727275,
+        "d_gdp": 81.71262699564585,
+        "d_pop": 37.892132947073144,
+        "d_prod": 83.52941176470586,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 9056877.333333334,
+        "region": "Africa",
+        "y_plot": 150.0
+      },
+      {
+        "clipped": false,
+        "country": "Saudi Arabia",
+        "d_cons": 17.37435089889956,
+        "d_gdp": 13.191701141559609,
+        "d_pop": 48.52088913214685,
+        "d_prod": 6.741554768020275,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 20562837.666666668,
+        "region": "Asia",
+        "y_plot": 17.37435089889956
+      },
+      {
+        "clipped": false,
+        "country": "Senegal",
+        "d_cons": 76.00459242250288,
+        "d_gdp": 22.66283131292377,
+        "d_pop": 41.62151313278601,
+        "d_prod": 61.180811808118094,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 11237092.666666666,
+        "region": "Africa",
+        "y_plot": 76.00459242250288
+      },
+      {
+        "clipped": false,
+        "country": "Singapore",
+        "d_cons": 4.568504986390476,
+        "d_gdp": 47.99252801992529,
+        "d_pop": 31.598378729337373,
+        "d_prod": -6.378019494278875,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 4282731.333333333,
+        "region": "Asia",
+        "y_plot": 4.568504986390476
+      },
+      {
+        "clipped": false,
+        "country": "Slovakia",
+        "d_cons": -6.619718309859146,
+        "d_gdp": 54.143967767563275,
+        "d_pop": 1.2398089423520053,
+        "d_prod": -18.250743517781608,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 5376527.333333333,
+        "region": "Europe",
+        "y_plot": -6.619718309859146
+      },
+      {
+        "clipped": false,
+        "country": "Slovenia",
+        "d_cons": -7.046818342264871,
+        "d_gdp": 21.257692235751826,
+        "d_pop": 3.699842781750262,
+        "d_prod": -17.944586362743177,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 1997859.6666666667,
+        "region": "Europe",
+        "y_plot": -7.046818342264871
+      },
+      {
+        "clipped": false,
+        "country": "South Africa",
+        "d_cons": -4.812053594703114,
+        "d_gdp": 12.72171728941711,
+        "d_pop": 18.42427018928079,
+        "d_prod": -12.219037562226575,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 49493244.0,
+        "region": "Africa",
+        "y_plot": -4.812053594703114
+      },
+      {
+        "clipped": false,
+        "country": "South Korea",
+        "d_cons": 14.512857954084524,
+        "d_gdp": 44.252366857694646,
+        "d_pop": 7.899235165501439,
+        "d_prod": 22.295911828783808,
+        "group": "South Korea",
+        "income_group": "High income",
+        "order": 2,
+        "pop_base": 47851746.666666664,
+        "region": "Asia",
+        "y_plot": 14.512857954084524
+      },
+      {
+        "clipped": false,
+        "country": "Spain",
+        "d_cons": -33.85670136052005,
+        "d_gdp": 6.322601421550211,
+        "d_pop": 7.208826253607681,
+        "d_prod": -31.431133575184454,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 43962963.666666664,
+        "region": "Europe",
+        "y_plot": -33.85670136052005
+      },
+      {
+        "clipped": false,
+        "country": "Sri Lanka",
+        "d_cons": 85.2029402364973,
+        "d_gdp": 93.46592159105909,
+        "d_pop": 10.047781315638504,
+        "d_prod": 64.32276657060521,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 20218851.666666668,
+        "region": "Asia",
+        "y_plot": 85.2029402364973
+      },
+      {
+        "clipped": false,
+        "country": "Sweden",
+        "d_cons": -28.321422346173964,
+        "d_gdp": 13.14238676968551,
+        "d_pop": 12.57435931341131,
+        "d_prod": -32.239925023430175,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 9034734.666666666,
+        "region": "Europe",
+        "y_plot": -28.321422346173964
+      },
+      {
+        "clipped": false,
+        "country": "Switzerland",
+        "d_cons": 0.23628654712479769,
+        "d_gdp": 13.082002802125015,
+        "d_pop": 14.590849936580863,
+        "d_prod": -28.316076294277927,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 7431511.333333333,
+        "region": "Europe",
+        "y_plot": 0.23628654712479769
+      },
+      {
+        "clipped": false,
+        "country": "Taiwan",
+        "d_cons": -8.711524516790448,
+        "d_gdp": 78.53640756722437,
+        "d_pop": 3.6232557642396745,
+        "d_prod": 1.5356178017915445,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 22828336.0,
+        "region": "Asia",
+        "y_plot": -8.711524516790448
+      },
+      {
+        "clipped": false,
+        "country": "Tajikistan",
+        "d_cons": 25.59579077684928,
+        "d_gdp": 70.72094163805787,
+        "d_pop": 34.42193252026215,
+        "d_prod": 129.77375565610862,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 6924281.0,
+        "region": "Asia",
+        "y_plot": 25.59579077684928
+      },
+      {
+        "clipped": false,
+        "country": "Tanzania",
+        "d_cons": 75.37942664418213,
+        "d_gdp": 52.17131771377408,
+        "d_pop": 46.500399888085944,
+        "d_prod": 94.16243654822335,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 39195549.666666664,
+        "region": "Africa",
+        "y_plot": 75.37942664418213
+      },
+      {
+        "clipped": false,
+        "country": "Thailand",
+        "d_cons": 28.569971440228482,
+        "d_gdp": 42.26330583422837,
+        "d_pop": 8.090087683498215,
+        "d_prod": 23.881524440762213,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 66012383.0,
+        "region": "Asia",
+        "y_plot": 28.569971440228482
+      },
+      {
+        "clipped": false,
+        "country": "Togo",
+        "d_cons": 118.91891891891895,
+        "d_gdp": 25.17924206213724,
+        "d_pop": 37.7417666976346,
+        "d_prod": -7.960741548527805,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 5421376.666666667,
+        "region": "Africa",
+        "y_plot": 118.91891891891895
+      },
+      {
+        "clipped": false,
+        "country": "Trinidad and Tobago",
+        "d_cons": 41.27619961070836,
+        "d_gdp": 11.716244123204,
+        "d_pop": 8.494619997574038,
+        "d_prod": -1.487134913736643,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 1352044.0,
+        "region": "Americas",
+        "y_plot": 41.27619961070836
+      },
+      {
+        "clipped": false,
+        "country": "Tunisia",
+        "d_cons": 56.60255024854117,
+        "d_gdp": 22.749524492532203,
+        "d_pop": 14.700478925347626,
+        "d_prod": 20.48869327667322,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 10256017.333333334,
+        "region": "Africa",
+        "y_plot": 56.60255024854117
+      },
+      {
+        "clipped": false,
+        "country": "Turkey",
+        "d_cons": 17.64881396389677,
+        "d_gdp": 58.80513216647512,
+        "d_pop": 21.584991760901296,
+        "d_prod": 29.59563598579964,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 69322509.66666667,
+        "region": "Europe",
+        "y_plot": 17.64881396389677
+      },
+      {
+        "clipped": false,
+        "country": "Uganda",
+        "d_cons": 53.5911602209945,
+        "d_gdp": 45.28790964636178,
+        "d_pop": 48.659487184192976,
+        "d_prod": 87.85046728971963,
+        "group": "Other income groups",
+        "income_group": "Low income",
+        "order": 0,
+        "pop_base": 27970601.666666668,
+        "region": "Africa",
+        "y_plot": 53.5911602209945
+      },
+      {
+        "clipped": false,
+        "country": "Ukraine",
+        "d_cons": -6.122170711753472,
+        "d_gdp": 9.596057417091686,
+        "d_pop": -5.0694272233161914,
+        "d_prod": -25.465035312841945,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 47614583.666666664,
+        "region": "Europe",
+        "y_plot": -6.122170711753472
+      },
+      {
+        "clipped": false,
+        "country": "United Arab Emirates",
+        "d_cons": -19.204318106035345,
+        "d_gdp": -23.994173064401615,
+        "d_pop": 98.25085920472765,
+        "d_prod": -13.040680919509395,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 4700955.666666667,
+        "region": "Asia",
+        "y_plot": -19.204318106035345
+      },
+      {
+        "clipped": false,
+        "country": "United Kingdom",
+        "d_cons": -35.91164574250144,
+        "d_gdp": 9.169000412042827,
+        "d_pop": 10.120463654355527,
+        "d_prod": -39.94264065432142,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 60605721.333333336,
+        "region": "Europe",
+        "y_plot": -35.91164574250144
+      },
+      {
+        "clipped": false,
+        "country": "United States",
+        "d_cons": -25.25650202815557,
+        "d_gdp": 12.912807676261995,
+        "d_pop": 13.279271600502774,
+        "d_prod": -23.758693191007595,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 295744374.0,
+        "region": "Americas",
+        "y_plot": -25.25650202815557
+      },
+      {
+        "clipped": false,
+        "country": "Uruguay",
+        "d_cons": 17.27374614738022,
+        "d_gdp": 61.302585352670924,
+        "d_pop": 3.2636701888260067,
+        "d_prod": 3.355335533553361,
+        "group": "High income",
+        "income_group": "High income",
+        "order": 1,
+        "pop_base": 3286147.0,
+        "region": "Americas",
+        "y_plot": 17.27374614738022
+      },
+      {
+        "clipped": false,
+        "country": "Venezuela",
+        "d_cons": -55.55652022920646,
+        "d_gdp": -26.531144123012762,
+        "d_pop": 11.150639184807032,
+        "d_prod": -28.53547459252158,
+        "group": "Other income groups",
+        "income_group": "Upper-middle income",
+        "order": 0,
+        "pop_base": 26783777.0,
+        "region": "Americas",
+        "y_plot": -55.55652022920646
+      },
+      {
+        "clipped": false,
+        "country": "Vietnam",
+        "d_cons": 140.25974025974025,
+        "d_gdp": 92.30364040735107,
+        "d_pop": 18.470351797221674,
+        "d_prod": 143.83209594517422,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 81198395.66666667,
+        "region": "Asia",
+        "y_plot": 140.25974025974025
+      },
+      {
+        "clipped": false,
+        "country": "Zambia",
+        "d_cons": 59.53237410071943,
+        "d_gdp": 40.551742002331316,
+        "d_pop": 53.2650828810302,
+        "d_prod": 147.41532976827094,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 11728860.0,
+        "region": "Africa",
+        "y_plot": 59.53237410071943
+      },
+      {
+        "clipped": false,
+        "country": "Zimbabwe",
+        "d_cons": -11.947069943289247,
+        "d_gdp": 31.742182514358653,
+        "d_pop": 20.36116846027145,
+        "d_prod": -14.637146371463727,
+        "group": "Other income groups",
+        "income_group": "Lower-middle income",
+        "order": 0,
+        "pop_base": 12495258.666666666,
+        "region": "Africa",
+        "y_plot": -11.947069943289247
+      }
+    ]
+  },
+  "height": 420,
+  "layer": [
+    {
+      "data": {
+        "name": "data-813453d9f29fedcd53e7aedd3fac0204"
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "y1"
+        }
+      },
+      "mark": {
+        "color": "#2B6CB0",
+        "opacity": 0.07,
+        "type": "rect"
+      }
+    },
+    {
+      "data": {
+        "name": "data-d2c1a376110f55439b51d979c4c4c27a"
+      },
+      "encoding": {
+        "x": {
+          "field": "v",
+          "type": "quantitative"
+        }
+      },
+      "mark": {
+        "color": "#666",
+        "type": "rule"
+      }
+    },
+    {
+      "data": {
+        "name": "data-d2c1a376110f55439b51d979c4c4c27a"
+      },
+      "encoding": {
+        "y": {
+          "field": "v",
+          "type": "quantitative"
+        }
+      },
+      "mark": {
+        "color": "#666",
+        "type": "rule"
+      }
+    },
+    {
+      "data": {
+        "name": "data-f8d3447ac0a710e60d645b50a3c3d3ae"
+      },
+      "encoding": {
+        "color": {
+          "field": "group",
+          "legend": {
+            "direction": "horizontal",
+            "orient": "top",
+            "title": null
+          },
+          "scale": {
+            "domain": [
+              "High income",
+              "Other income groups",
+              "South Korea"
+            ],
+            "range": [
+              "#2B6CB0",
+              "#BDBDBD",
+              "#D62728"
+            ]
+          },
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "(datum.group === 'Other income groups')",
+            "value": 0.7
+          },
+          "value": 0.95
+        },
+        "order": {
+          "field": "order",
+          "type": "quantitative"
+        },
+        "shape": {
+          "field": "clipped",
+          "legend": null,
+          "scale": {
+            "domain": [
+              false,
+              true
+            ],
+            "range": [
+              "circle",
+              "triangle-up"
+            ]
+          },
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal"
+          },
+          {
+            "field": "income_group",
+            "title": "Income group",
+            "type": "nominal"
+          },
+          {
+            "field": "d_gdp",
+            "format": "+.0f",
+            "title": "GDP/person change (%)",
+            "type": "quantitative"
+          },
+          {
+            "field": "d_cons",
+            "format": "+.0f",
+            "title": "Cons. CO₂/person change (%)",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "axis": {
+            "values": [
+              -40,
+              -20,
+              0,
+              20,
+              40,
+              60,
+              80,
+              100,
+              120,
+              140,
+              160,
+              180
+            ]
+          },
+          "field": "d_gdp",
+          "scale": {
+            "domain": [
+              -40,
+              180
+            ],
+            "nice": false
+          },
+          "title": "Change in GDP per person (%)",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y_plot",
+          "scale": {
+            "domain": [
+              -60,
+              150
+            ],
+            "nice": false
+          },
+          "title": "Change in CO₂ per person, consumption-based (%)",
+          "type": "quantitative"
+        }
+      },
+      "mark": {
+        "filled": true,
+        "size": 70,
+        "type": "point"
+      }
+    },
+    {
+      "layer": [
+        {
+          "data": {
+            "name": "data-7009d50f3e28879cedfd006e3343d767"
+          },
+          "encoding": {
+            "text": {
+              "field": "lab",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "d_gdp",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "y_plot",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "align": "left",
+            "color": "#333",
+            "dx": 7,
+            "dy": -7,
+            "fontSize": 11.5,
+            "type": "text"
+          }
+        },
+        {
+          "data": {
+            "name": "data-4fddb8db3c82714301c67d9edab9a42f"
+          },
+          "encoding": {
+            "text": {
+              "field": "lab",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "d_gdp",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "y_plot",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "align": "left",
+            "color": "#D62728",
+            "dx": 8,
+            "dy": -8,
+            "fontSize": 13,
+            "fontWeight": "bold",
+            "type": "text"
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "name": "data-38e8c34d83e61d3b6ac8b65ff5cd3c7a"
+      },
+      "encoding": {
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        },
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        }
+      },
+      "mark": {
+        "align": "right",
+        "color": "#2B6CB0",
+        "fontSize": 12.5,
+        "fontWeight": "bold",
+        "type": "text"
+      }
+    },
+    {
+      "data": {
+        "name": "data-2a567963f4a4e0fb2a7a71ef6dab4cbc"
+      },
+      "encoding": {
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        },
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        }
+      },
+      "mark": {
+        "align": "right",
+        "color": "#777",
+        "fontSize": 10.5,
+        "type": "text"
+      }
+    }
+  ],
+  "title": {
+    "subtitle": [
+      "Each dot is one country (≥1M people, 115 countries). Change from the 2004–06 average to the 2017–19 average.",
+      "Most countries outside the high-income group (grey) are still in the upper-right: growth came with more CO₂."
+    ],
+    "text": "② 27 of 44 high-income countries are in the 'grew but emitted less' corner"
+  },
+  "width": 700
+}, opt);
+vegaEmbed('#c3', {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json",
+  "config": {
+    "axis": {
+      "domainColor": "#888",
+      "gridColor": "#EEEEEE",
+      "labelFontSize": 12,
+      "tickColor": "#888",
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 16,
+      "subtitleColor": "#555",
+      "subtitleFontSize": 12.5
+    },
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 300,
+      "stroke": null
+    }
+  },
+  "datasets": {
+    "data-7ed6fce5b6fb894935561b0f130260f1": [
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 60.0,
+        "country": "Panama",
+        "d_cons": 985.7929948839038,
+        "d_gdp": 93.47916378236188,
+        "d_pop": 25.777270337288517,
+        "d_prod": 26.775399252463483,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 3313068.6666666665,
+        "prod_plot": 26.775399252463483,
+        "rank": 44.0,
+        "region": "Americas"
+      }
+    ],
+    "data-a678c5339482690b9f53a50e45bc9045": [
+      {
+        "t": "Hollow dot = production-based (inside the borders)"
+      }
+    ],
+    "data-d2c1a376110f55439b51d979c4c4c27a": [
+      {
+        "v": 0
+      }
+    ],
+    "data-d8bf6b63c873deb7fa621554ae735d7f": [
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -11.62817244397093,
+        "country": "Australia",
+        "d_cons": -11.62817244397093,
+        "d_gdp": 14.10864646437837,
+        "d_pop": 23.63583278893997,
+        "d_prod": -13.196465514218591,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 20310578.333333332,
+        "prod_plot": -13.196465514218591,
+        "rank": 26.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -21.617005622996476,
+        "country": "Austria",
+        "d_cons": -21.617005622996476,
+        "d_gdp": 12.427511086539699,
+        "d_pop": 7.49295544478672,
+        "d_prod": -18.714356121946064,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 8224200.333333333,
+        "prod_plot": -18.714356121946064,
+        "rank": 14.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -12.741766647878238,
+        "country": "Belgium",
+        "d_cons": -12.741766647878238,
+        "d_gdp": 10.231463464353885,
+        "d_pop": 9.05345753420197,
+        "d_prod": -27.46412543631226,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 10482875.333333334,
+        "prod_plot": -27.46412543631226,
+        "rank": 25.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -19.80620643697206,
+        "country": "Canada",
+        "d_cons": -19.80620643697206,
+        "d_gdp": 9.1739382251669,
+        "d_pop": 14.953353585797124,
+        "d_prod": -12.621910803901127,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 32444008.666666668,
+        "prod_plot": -12.621910803901127,
+        "rank": 16.0,
+        "region": "Americas"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 28.555294935279306,
+        "country": "Chile",
+        "d_cons": 28.555294935279306,
+        "d_gdp": 33.74381510931252,
+        "d_pop": 15.505057885364293,
+        "d_prod": 22.321745299751704,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 16348433.0,
+        "prod_plot": 22.321745299751704,
+        "rank": 42.0,
+        "region": "Americas"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -13.497703649987924,
+        "country": "Croatia",
+        "d_cons": -13.497703649987924,
+        "d_gdp": 23.06177042801558,
+        "d_pop": -6.564198297376822,
+        "d_prod": -16.679053635575393,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 4313266.0,
+        "prod_plot": -16.679053635575393,
+        "rank": 24.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -13.812838360402157,
+        "country": "Cyprus",
+        "d_cons": -13.812838360402157,
+        "d_gdp": 8.184452152621935,
+        "d_pop": 22.623168101194977,
+        "d_prod": -24.574398960363887,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 1036151.6666666666,
+        "prod_plot": -24.574398960363887,
+        "rank": 23.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -4.273325358851688,
+        "country": "Czechia",
+        "d_cons": -4.273325358851688,
+        "d_gdp": 32.12916571775602,
+        "d_pop": 2.5901051020871257,
+        "d_prod": -19.3018480492813,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 10282066.666666666,
+        "prod_plot": -19.3018480492813,
+        "rank": 31.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -26.41153518178765,
+        "country": "Denmark",
+        "d_cons": -26.41153518178765,
+        "d_gdp": 8.38287131489659,
+        "d_pop": 6.838436069729803,
+        "d_prod": -43.52138871667699,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 5420523.0,
+        "prod_plot": -43.52138871667699,
+        "rank": 9.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -19.04561786892479,
+        "country": "Estonia",
+        "d_cons": -19.04561786892479,
+        "d_gdp": 35.04835421232242,
+        "d_pop": -2.415846417220291,
+        "d_prod": -1.7958487650209243,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 1354804.6666666667,
+        "prod_plot": -1.7958487650209243,
+        "rank": 19.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -35.41319409579275,
+        "country": "Finland",
+        "d_cons": -35.41319409579275,
+        "d_gdp": 6.76378311363004,
+        "d_pop": 5.116803033809725,
+        "d_prod": -34.98528895727049,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 5246824.333333333,
+        "prod_plot": -34.98528895727049,
+        "rank": 5.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -21.73418297678653,
+        "country": "France",
+        "d_cons": -21.73418297678653,
+        "d_gdp": 8.890927020336115,
+        "d_pop": 6.320616337650353,
+        "d_prod": -25.66362866676628,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 61616702.0,
+        "prod_plot": -25.66362866676628,
+        "rank": 13.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -17.056759870143456,
+        "country": "Germany",
+        "d_cons": -17.056759870143456,
+        "d_gdp": 21.124421700136974,
+        "d_pop": 1.7044691535083478,
+        "d_prod": -15.8319317261571,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 81947136.66666667,
+        "prod_plot": -15.8319317261571,
+        "rank": 21.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "CO₂ fell, but GDP also fell",
+        "cons_plot": -36.246876271284954,
+        "country": "Greece",
+        "d_cons": -36.246876271284954,
+        "d_gdp": -15.099232418228336,
+        "d_pop": -2.2518170992365083,
+        "d_prod": -35.30431369983974,
+        "grp": "CO₂ fell, but GDP also fell",
+        "income_group": "High income",
+        "pop_base": 10981605.333333334,
+        "prod_plot": -35.30431369983974,
+        "rank": 3.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 16.0734574628423,
+        "country": "Hong Kong",
+        "d_cons": 16.0734574628423,
+        "d_gdp": 37.15597601008351,
+        "d_pop": 8.076907193337469,
+        "d_prod": -7.08936867996719,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 6909245.333333333,
+        "prod_plot": -7.08936867996719,
+        "rank": 36.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -22.694601621042978,
+        "country": "Hungary",
+        "d_cons": -22.694601621042978,
+        "d_gdp": 30.17629430107136,
+        "d_pop": -2.884260109874903,
+        "d_prod": -15.197534323339868,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 10067145.666666666,
+        "prod_plot": -15.197534323339868,
+        "rank": 11.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -42.16781506095323,
+        "country": "Ireland",
+        "d_cons": -42.16781506095323,
+        "d_gdp": 45.29852777952294,
+        "d_pop": 17.02293748244612,
+        "d_prod": -30.646485979115333,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 4163374.6666666665,
+        "prod_plot": -30.646485979115333,
+        "rank": 2.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -8.699242133820896,
+        "country": "Israel",
+        "d_cons": -8.699242133820896,
+        "d_gdp": 29.864146018311622,
+        "d_pop": 26.46216871229845,
+        "d_prod": -20.710328602868632,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 6729108.333333333,
+        "prod_plot": -20.710328602868632,
+        "rank": 28.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "CO₂ fell, but GDP also fell",
+        "cons_plot": -27.218576798114302,
+        "country": "Italy",
+        "d_cons": -27.218576798114302,
+        "d_gdp": -4.258891871215353,
+        "d_pop": 3.0476241707464657,
+        "d_prod": -32.54606495940037,
+        "grp": "CO₂ fell, but GDP also fell",
+        "income_group": "High income",
+        "pop_base": 58483622.0,
+        "prod_plot": -32.54606495940037,
+        "rank": 8.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -14.743389474282154,
+        "country": "Japan",
+        "d_cons": -14.743389474282154,
+        "d_gdp": 7.999871125716851,
+        "d_pop": -0.7945266265493078,
+        "d_prod": -9.840994120791013,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 127908782.33333333,
+        "prod_plot": -9.840994120791013,
+        "rank": 22.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "CO₂ fell, but GDP also fell",
+        "cons_plot": -19.151722301136363,
+        "country": "Kuwait",
+        "d_cons": -19.151722301136363,
+        "d_gdp": -33.11525258746559,
+        "d_pop": 91.16038235402475,
+        "d_prod": -25.790442897718393,
+        "grp": "CO₂ fell, but GDP also fell",
+        "income_group": "High income",
+        "pop_base": 2252955.6666666665,
+        "prod_plot": -25.790442897718393,
+        "rank": 18.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 20.04640371229698,
+        "country": "Latvia",
+        "d_cons": 20.04640371229698,
+        "d_gdp": 46.82674347311535,
+        "d_pop": -13.960319827220113,
+        "d_prod": 10.556964403118263,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 2241001.6666666665,
+        "prod_plot": 10.556964403118263,
+        "rank": 39.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 26.425835834799717,
+        "country": "Lithuania",
+        "d_cons": 26.425835834799717,
+        "d_gdp": 71.83859011119658,
+        "d_pop": -15.467465614635145,
+        "d_prod": 15.467481308786857,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 3322925.3333333335,
+        "prod_plot": 15.467481308786857,
+        "rank": 40.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -22.364348516804068,
+        "country": "Netherlands",
+        "d_cons": -22.364348516804068,
+        "d_gdp": 14.258981395375358,
+        "d_pop": 5.850033370375529,
+        "d_prod": -16.177105831533467,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 16461706.666666666,
+        "prod_plot": -16.177105831533467,
+        "rank": 12.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -17.92971783587887,
+        "country": "New Zealand",
+        "d_cons": -17.92971783587887,
+        "d_gdp": 14.880022252947311,
+        "d_pop": 18.564378252244996,
+        "d_prod": -17.517674783974858,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 4133619.0,
+        "prod_plot": -17.517674783974858,
+        "rank": 20.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -20.305436420540158,
+        "country": "Norway",
+        "d_cons": -20.305436420540158,
+        "d_gdp": 3.524665553489714,
+        "d_pop": 14.8532872621699,
+        "d_prod": -12.83350932770152,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 4625115.333333333,
+        "prod_plot": -12.83350932770152,
+        "rank": 15.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 27.653891702572643,
+        "country": "Oman",
+        "d_cons": 27.653891702572643,
+        "d_gdp": -7.628106830234483,
+        "d_pop": 86.01076452579497,
+        "d_prod": 10.913107868605687,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 2459808.0,
+        "prod_plot": 10.913107868605687,
+        "rank": 41.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 60.0,
+        "country": "Panama",
+        "d_cons": 985.7929948839038,
+        "d_gdp": 93.47916378236188,
+        "d_pop": 25.777270337288517,
+        "d_prod": 26.775399252463483,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 3313068.6666666665,
+        "prod_plot": 26.775399252463483,
+        "rank": 44.0,
+        "region": "Americas"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 5.638446257238283,
+        "country": "Poland",
+        "d_cons": 5.638446257238283,
+        "d_gdp": 67.25261914622736,
+        "d_pop": 0.31374101967878154,
+        "d_prod": 0.39959652389818245,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 38121038.0,
+        "prod_plot": 0.39959652389818245,
+        "rank": 34.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -51.49542575650949,
+        "country": "Portugal",
+        "d_cons": -51.49542575650949,
+        "d_gdp": 9.412324574499852,
+        "d_pop": -1.6157258126711316,
+        "d_prod": -22.389924013739982,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 10502834.0,
+        "prod_plot": -22.389924013739982,
+        "rank": 1.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 17.37435089889956,
+        "country": "Saudi Arabia",
+        "d_cons": 17.37435089889956,
+        "d_gdp": 13.191701141559609,
+        "d_pop": 48.52088913214685,
+        "d_prod": 6.741554768020275,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 20562837.666666668,
+        "prod_plot": 6.741554768020275,
+        "rank": 38.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 4.568504986390476,
+        "country": "Singapore",
+        "d_cons": 4.568504986390476,
+        "d_gdp": 47.99252801992529,
+        "d_pop": 31.598378729337373,
+        "d_prod": -6.378019494278875,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 4282731.333333333,
+        "prod_plot": -6.378019494278875,
+        "rank": 33.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -6.619718309859146,
+        "country": "Slovakia",
+        "d_cons": -6.619718309859146,
+        "d_gdp": 54.143967767563275,
+        "d_pop": 1.2398089423520053,
+        "d_prod": -18.250743517781608,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 5376527.333333333,
+        "prod_plot": -18.250743517781608,
+        "rank": 30.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -7.046818342264871,
+        "country": "Slovenia",
+        "d_cons": -7.046818342264871,
+        "d_gdp": 21.257692235751826,
+        "d_pop": 3.699842781750262,
+        "d_prod": -17.944586362743177,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 1997859.6666666667,
+        "prod_plot": -17.944586362743177,
+        "rank": 29.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "South Korea",
+        "cons_plot": 14.512857954084524,
+        "country": "South Korea",
+        "d_cons": 14.512857954084524,
+        "d_gdp": 44.252366857694646,
+        "d_pop": 7.899235165501439,
+        "d_prod": 22.295911828783808,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 47851746.666666664,
+        "prod_plot": 22.295911828783808,
+        "rank": 35.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -33.85670136052005,
+        "country": "Spain",
+        "d_cons": -33.85670136052005,
+        "d_gdp": 6.322601421550211,
+        "d_pop": 7.208826253607681,
+        "d_prod": -31.431133575184454,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 43962963.666666664,
+        "prod_plot": -31.431133575184454,
+        "rank": 6.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -28.321422346173964,
+        "country": "Sweden",
+        "d_cons": -28.321422346173964,
+        "d_gdp": 13.14238676968551,
+        "d_pop": 12.57435931341131,
+        "d_prod": -32.239925023430175,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 9034734.666666666,
+        "prod_plot": -32.239925023430175,
+        "rank": 7.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 0.23628654712479769,
+        "country": "Switzerland",
+        "d_cons": 0.23628654712479769,
+        "d_gdp": 13.082002802125015,
+        "d_pop": 14.590849936580863,
+        "d_prod": -28.316076294277927,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 7431511.333333333,
+        "prod_plot": -28.316076294277927,
+        "rank": 32.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -8.711524516790448,
+        "country": "Taiwan",
+        "d_cons": -8.711524516790448,
+        "d_gdp": 78.53640756722437,
+        "d_pop": 3.6232557642396745,
+        "d_prod": 1.5356178017915445,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 22828336.0,
+        "prod_plot": 1.5356178017915445,
+        "rank": 27.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 41.27619961070836,
+        "country": "Trinidad and Tobago",
+        "d_cons": 41.27619961070836,
+        "d_gdp": 11.716244123204,
+        "d_pop": 8.494619997574038,
+        "d_prod": -1.487134913736643,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 1352044.0,
+        "prod_plot": -1.487134913736643,
+        "rank": 43.0,
+        "region": "Americas"
+      },
+      {
+        "cat2": "CO₂ fell, but GDP also fell",
+        "cons_plot": -19.204318106035345,
+        "country": "United Arab Emirates",
+        "d_cons": -19.204318106035345,
+        "d_gdp": -23.994173064401615,
+        "d_pop": 98.25085920472765,
+        "d_prod": -13.040680919509395,
+        "grp": "CO₂ fell, but GDP also fell",
+        "income_group": "High income",
+        "pop_base": 4700955.666666667,
+        "prod_plot": -13.040680919509395,
+        "rank": 17.0,
+        "region": "Asia"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -35.91164574250144,
+        "country": "United Kingdom",
+        "d_cons": -35.91164574250144,
+        "d_gdp": 9.169000412042827,
+        "d_pop": 10.120463654355527,
+        "d_prod": -39.94264065432142,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 60605721.333333336,
+        "prod_plot": -39.94264065432142,
+        "rank": 4.0,
+        "region": "Europe"
+      },
+      {
+        "cat2": "Decoupled",
+        "cons_plot": -25.25650202815557,
+        "country": "United States",
+        "d_cons": -25.25650202815557,
+        "d_gdp": 12.912807676261995,
+        "d_pop": 13.279271600502774,
+        "d_prod": -23.758693191007595,
+        "grp": "Decoupled",
+        "income_group": "High income",
+        "pop_base": 295744374.0,
+        "prod_plot": -23.758693191007595,
+        "rank": 10.0,
+        "region": "Americas"
+      },
+      {
+        "cat2": "CO₂ did not fall",
+        "cons_plot": 17.27374614738022,
+        "country": "Uruguay",
+        "d_cons": 17.27374614738022,
+        "d_gdp": 61.302585352670924,
+        "d_pop": 3.2636701888260067,
+        "d_prod": 3.355335533553361,
+        "grp": "CO₂ did not fall",
+        "income_group": "High income",
+        "pop_base": 3286147.0,
+        "prod_plot": 3.355335533553361,
+        "rank": 37.0,
+        "region": "Americas"
+      }
+    ]
+  },
+  "title": {
+    "subtitle": [
+      "If rich countries only shifted emissions to other countries, the filled dots (with imports) would stay near or above 0.",
+      "For the 27 decoupled countries the median change is -19% (production) vs -20% (consumption): the fall is still there.",
+      "South Korea: GDP/person +44%, CO₂/person +22% (production), +15% (consumption)."
+    ],
+    "text": "③ It is not just 'moving factories abroad'"
+  },
+  "vconcat": [
+    {
+      "data": {
+        "name": "data-a678c5339482690b9f53a50e45bc9045"
+      },
+      "encoding": {
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        },
+        "x": {
+          "value": 0
+        }
+      },
+      "height": 12,
+      "mark": {
+        "align": "left",
+        "color": "#444",
+        "fontSize": 11.5,
+        "type": "text"
+      },
+      "width": 520
+    },
+    {
+      "height": 720,
+      "layer": [
+        {
+          "data": {
+            "name": "data-d8bf6b63c873deb7fa621554ae735d7f"
+          },
+          "encoding": {
+            "x": {
+              "field": "prod_plot",
+              "type": "quantitative"
+            },
+            "x2": {
+              "field": "cons_plot"
+            },
+            "y": {
+              "axis": {
+                "labelFontSize": 11
+              },
+              "field": "country",
+              "sort": {
+                "field": "rank",
+                "order": "ascending"
+              },
+              "title": null,
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "color": "#CCCCCC",
+            "strokeWidth": 2,
+            "type": "rule"
+          }
+        },
+        {
+          "data": {
+            "name": "data-d2c1a376110f55439b51d979c4c4c27a"
+          },
+          "encoding": {
+            "x": {
+              "field": "v",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "color": "#444",
+            "type": "rule"
+          }
+        },
+        {
+          "data": {
+            "name": "data-d8bf6b63c873deb7fa621554ae735d7f"
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "country",
+                "type": "nominal"
+              },
+              {
+                "field": "d_prod",
+                "format": "+.0f",
+                "title": "Production-based change (%)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "field": "prod_plot",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "country",
+              "sort": {
+                "field": "rank",
+                "order": "ascending"
+              },
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "color": "#555",
+            "filled": false,
+            "size": 55,
+            "strokeWidth": 1.6,
+            "type": "point"
+          }
+        },
+        {
+          "data": {
+            "name": "data-d8bf6b63c873deb7fa621554ae735d7f"
+          },
+          "encoding": {
+            "color": {
+              "field": "cat2",
+              "legend": {
+                "columns": 2,
+                "direction": "horizontal",
+                "orient": "bottom",
+                "title": "Filled dot = consumption-based (colour = group)",
+                "titleLimit": 400
+              },
+              "scale": {
+                "domain": [
+                  "Decoupled",
+                  "CO₂ fell, but GDP also fell",
+                  "CO₂ did not fall",
+                  "South Korea"
+                ],
+                "range": [
+                  "#2B6CB0",
+                  "#9CB7D4",
+                  "#7A7A7A",
+                  "#D62728"
+                ]
+              },
+              "type": "nominal"
+            },
+            "tooltip": [
+              {
+                "field": "country",
+                "type": "nominal"
+              },
+              {
+                "field": "d_cons",
+                "format": "+.0f",
+                "title": "Consumption-based change (%)",
+                "type": "quantitative"
+              },
+              {
+                "field": "d_gdp",
+                "format": "+.0f",
+                "title": "GDP/person change (%)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "field": "cons_plot",
+              "scale": {
+                "domain": [
+                  -60,
+                  60
+                ],
+                "nice": false
+              },
+              "title": "Change in CO₂ per person, 2004–06 → 2017–19 (%)",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "country",
+              "sort": {
+                "field": "rank",
+                "order": "ascending"
+              },
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "filled": true,
+            "opacity": 1,
+            "size": 80,
+            "type": "point"
+          }
+        },
+        {
+          "data": {
+            "name": "data-7ed6fce5b6fb894935561b0f130260f1"
+          },
+          "encoding": {
+            "text": {
+              "value": "actual +986% (base only 0.4 t) →"
+            },
+            "x": {
+              "field": "cons_plot",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "country",
+              "sort": {
+                "field": "rank",
+                "order": "ascending"
+              },
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "align": "right",
+            "color": "#555",
+            "dx": -2,
+            "dy": -11,
+            "fontSize": 10,
+            "type": "text"
+          }
+        }
+      ],
+      "width": 520
+    }
+  ]
+}, opt);
+</script>
+</body>
+</html>
