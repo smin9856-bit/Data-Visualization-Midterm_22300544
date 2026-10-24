@@ -1,4 +1,4 @@
-Data Visualization Midterm Take-Home  |  성장할수록 탄소도 늘어날까? (1990-2022)
+Data Visualization Midterm_22300544  |  성장할수록 탄소도 늘어날까? (1990-2022)
 =========================================================================
 
 [먼저 볼 것]
@@ -7,8 +7,8 @@ Data Visualization Midterm Take-Home  |  성장할수록 탄소도 늘어날까?
 3. partB_explanatory.html   : Part B 설명용 시각화. 조작 없이 위에서 아래로 읽으면 됨
 
   온라인 버전 (같은 내용)
-  - Part A: https://smin9856-bit.github.io/Data-midterm/partA_dashboard.html
-  - Part B: https://smin9856-bit.github.io/Data-midterm/partB_explanatory.html
+  - Part A: https://smin9856-bit.github.io/Data-Visualization-Midterm_22300544/partA_dashboard.html
+  - Part B: https://smin9856-bit.github.io/Data-Visualization-Midterm_22300544/partB_explanatory.html
 
   * HTML은 Vega/Vega-Lite 라이브러리를 CDN(jsdelivr)에서 불러오기 때문에 인터넷 연결이 필요함.
   * 데이터는 HTML 안에 들어 있어서 다른 파일 없이 HTML 하나만 열어도 됨.
