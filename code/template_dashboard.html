@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Growth vs. Carbon Explorer (1990–2022)</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #222; background: #fff; margin: 0; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 24px 20px 40px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  .sub { color: #555; margin: 0 0 18px; font-size: 15px; }
+  .info { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 14px; }
+  .box { flex: 1 1 340px; background: #f6f6f6; border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.5; }
+  .box h3 { margin: 0 0 6px; font-size: 14px; }
+  .box ul, .box ol { margin: 0; padding-left: 18px; }
+  .toolbar { display: flex; align-items: center; gap: 12px; margin: 8px 0 4px; font-size: 13px; color: #555; }
+  button { font-size: 13px; padding: 5px 12px; border: 1px solid #999; background: #fff; border-radius: 4px; cursor: pointer; }
+  button:hover { background: #eee; }
+  #vis { overflow-x: auto; }
+  #controls .vega-bindings { display: flex; flex-wrap: wrap; gap: 4px 28px; align-items: center; }
+  #controls .vega-bindings { margin: 10px 0 14px; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; font-size: 13px; }
+  #controls .vega-bind { margin: 4px 0; }
+  #controls .vega-bind-name { font-weight: bold; margin-right: 6px; }
+  .notes { font-size: 12.5px; color: #555; line-height: 1.55; border-top: 1px solid #ddd; margin-top: 20px; padding-top: 12px; }
+  .notes a { color: #336; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Growth vs. Carbon Explorer (1990–2022)</h1>
+  <p class="sub">Do countries that get richer always emit more CO₂? Explore income and CO₂ per person for 195 countries, and check whether a country's emissions moved together with its economy.</p>
+
+  <div class="info">
+    <div class="box">
+      <h3>Who is this for</h3>
+      Students and general readers who are interested in climate and economy news, and want to check claims like "growth needs more emissions" with real data by themselves.
+      <h3 style="margin-top:10px">Questions you can explore</h3>
+      <ul>
+        <li>In a given year, how strongly is income related to CO₂ per person? Which countries are far above or below the overall pattern?</li>
+        <li>Did my selected country's CO₂ per person go down while its GDP per person kept going up?</li>
+        <li>Is a country's consumption-based CO₂ (including imported goods) higher than its production-based CO₂?</li>
+        <li>Did the low-carbon share of electricity change around the time emissions changed?</li>
+        <li>Who are the top emitters per person in each region, and did the ranking change between 1990 and 2022?</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>How to use</h3>
+      <ol>
+        <li><b>Year</b> slider: changes the year of the scatter plot, the top-20 ranking and the numbers at the top. The dashed line in the right charts marks this year.</li>
+        <li><b>CO₂ basis</b>: switch between production-based and consumption-based CO₂ for the scatter plot and the ranking.</li>
+        <li><b>Country</b>: pick from the dropdown, <i>or</i> click a circle in the scatter plot. The selected country gets a black ring, and the three charts on the right show its history.</li>
+        <li><b>Region</b>: click a region in the legend to keep only that region (shift + click to add more, double-click the legend to clear).</li>
+        <li>Hover on any mark to see exact values.</li>
+        <li>Press <b>Reset view</b> to go back to the default (South Korea, 2019, production-based, all regions).</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="toolbar"><button onclick="location.reload()">Reset view</button><span>Default view: South Korea · 2019 · production-based CO₂ · all regions</span></div>
+  <div id="controls"></div>
+  <div id="vis"></div>
+
+  <div class="notes">
+    <b>Data.</b> CO₂ per person (production and consumption-based) and population: Our World in Data CO₂ dataset (based on Global Carbon Budget), <a href="https://github.com/owid/co2-data">github.com/owid/co2-data</a>.
+    Low-carbon share of electricity: Our World in Data energy dataset (Ember / Energy Institute), <a href="https://github.com/owid/energy-data">github.com/owid/energy-data</a>.
+    GDP per person (constant 2021 international $, PPP) and region/income groups: Gapminder Fast Track, <a href="https://www.gapminder.org/data/">gapminder.org/data</a> (<a href="https://github.com/open-numbers/ddf--gapminder--fasttrack">GitHub</a>). Accessed 2026-10-22.<br>
+    <b>Notes.</b> Production-based = emissions inside the country's borders. Consumption-based = production − emissions in exports + emissions in imports; it exists for only 120 of the 195 countries, so countries without it disappear from the scatter and the ranking when that basis is selected (they are not set to 0).
+    Regions follow Gapminder's 4 regions, so Oceania (e.g. Australia, New Zealand) is counted as Asia. Income groups are the World Bank groups provided by Gapminder (current classification, not the one of each year).
+    Missing years are shown as gaps, not as zero.
+  </div>
+</div>
+
+<script>
+const spec = __SPEC__;
+function draw() {
+  document.getElementById('controls').innerHTML = '';
+  vegaEmbed('#vis', spec, {actions: {export: true, source: false, compiled: false, editor: false}})
+    .then(res => {
+      // 컨트롤(슬라이더/드롭다운)이 기본으로 차트 맨 아래에 붙어서 위로 옮김
+      const b = document.querySelector('#vis .vega-bindings');
+      if (b) document.getElementById('controls').appendChild(b);
+    })
+    .catch(err => { document.getElementById('vis').innerHTML = '<p style="color:#b00">Chart failed to load: ' + err + '</p>'; });
+}
+draw();
+</script>
+</body>
+</html>
